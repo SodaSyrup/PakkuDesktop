@@ -20,7 +20,7 @@ import org.jetbrains.jewel.ui.component.Icon
 import org.jetbrains.jewel.ui.component.Text
 import org.jetbrains.jewel.ui.component.separator
 import teksturepako.pakkuDesktop.app.ui.PakkuDesktopIcons
-import teksturepako.pakkuDesktop.app.ui.view.Navigation
+import teksturepako.pakkuDesktop.app.ui.view.Nav
 import teksturepako.pakkuDesktop.app.ui.viewmodel.ProfileViewModel
 import teksturepako.pakkuDesktop.pkui.component.PkUiDropdown
 import kotlin.io.path.Path
@@ -98,7 +98,7 @@ fun WelcomeViewDropdown(
                 profileData.recentProfilesFiltered.map { profile ->
                     selectableItem(false, onClick = {
                         coroutineScope.launch {
-                            navController.navigate(Navigation.Modpack.route)
+                            navController.navigate(Nav.Modpack.route)
                             ProfileViewModel.updateCurrentProfile(Path(profile.path))
                         }
                     }) {

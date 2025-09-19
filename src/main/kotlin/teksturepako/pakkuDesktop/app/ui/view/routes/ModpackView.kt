@@ -25,11 +25,10 @@ import teksturepako.pakkuDesktop.app.ui.application.titlebar.AlignedTitleBarCont
 import teksturepako.pakkuDesktop.app.ui.application.titlebar.MainTitleBar
 import teksturepako.pakkuDesktop.app.ui.component.Error
 import teksturepako.pakkuDesktop.app.ui.component.button.SettingsButton
-import teksturepako.pakkuDesktop.app.ui.component.dialog.CreateModpackDialog
 import teksturepako.pakkuDesktop.app.ui.component.dropdown.ModpackDropdown
 import teksturepako.pakkuDesktop.app.ui.component.modpack.ModpackSideBar
 import teksturepako.pakkuDesktop.app.ui.modifier.subtractTopHeight
-import teksturepako.pakkuDesktop.app.ui.view.Navigation
+import teksturepako.pakkuDesktop.app.ui.view.Nav
 import teksturepako.pakkuDesktop.app.ui.view.routes.modpackTabs.GitTab
 import teksturepako.pakkuDesktop.app.ui.view.routes.modpackTabs.ModpackTab
 import teksturepako.pakkuDesktop.app.ui.view.routes.modpackTabs.ProjectsTab
@@ -69,14 +68,14 @@ fun PakkuApplicationScope.ModpackView(navController: NavHostController)
         {
             ProfileViewModel.updateCloseDialog {
                 ProfileViewModel.updateCurrentProfile(Path(directory.path!!))
-                navController.navigate(Navigation.Modpack.route)
+                navController.navigate(Nav.Modpack.route)
             }
         }
         else
         {
             coroutineScope.launch {
                 ProfileViewModel.updateCurrentProfile(Path(directory.path!!))
-                navController.navigate(Navigation.Modpack.route)
+                navController.navigate(Nav.Modpack.route)
             }
         }
     }
@@ -98,7 +97,7 @@ fun PakkuApplicationScope.ModpackView(navController: NavHostController)
             }
         }
         AlignedTitleBarContent(alignment = Alignment.End) {
-            SettingsButton(onClick = { navController.navigate(Navigation.Settings(Navigation.Modpack).route) })
+            SettingsButton(onClick = { navController.navigate(Nav.Settings(Nav.Modpack).route) })
         }
     }
 
@@ -111,7 +110,7 @@ fun PakkuApplicationScope.ModpackView(navController: NavHostController)
         ) {
             if (modpackUiState.lockFile!!.getError() is FileNotFound)
             {
-                CreateModpackDialog()
+                navController.navigate(Nav.NewModpack(Nav.Modpack).route)
             }
             else
             {

@@ -16,14 +16,16 @@ import kotlinx.serialization.Serializable
 import teksturepako.pakkuDesktop.app.ui.application.PakkuApplicationScope
 import teksturepako.pakkuDesktop.app.ui.view.routes.ModpackView
 import teksturepako.pakkuDesktop.app.ui.view.routes.WelcomeView
+import teksturepako.pakkuDesktop.app.ui.view.routes.dialogs.NewModpackDialog
 import teksturepako.pakkuDesktop.app.ui.view.routes.dialogs.SettingsDialog
 import teksturepako.pakkuDesktop.app.ui.viewmodel.ProfileViewModel
 
 @Serializable
-sealed class Navigation(val route: String) {
-    data object Home : Navigation("home")
-    data object Modpack : Navigation("modpack")
-    data class Settings(val parent: Navigation) : Navigation("$parent/settings")
+sealed class Nav(val route: String) {
+    data object Home : Nav("home")
+    data object Modpack : Nav("modpack")
+    data class Settings(val parent: Nav) : Nav("${parent.route}/settings")
+    data class NewModpack(val parent: Nav) : Nav("${parent.route}/new_modpack")
 }
 
 @Composable
@@ -33,26 +35,38 @@ fun PakkuApplicationScope.RootView() {
 
     LaunchedEffect(Unit) {
         if (profileData.currentProfile != null) {
-            navController.navigate(Navigation.Modpack.route)
+            navController.navigate(Nav.Modpack.route)
         }
     }
 
     NavHost(
         navController = navController,
-        startDestination = Navigation.Home.route,
+        startDestination = Nav.Home.route,
     ) {
-        composable(Navigation.Home.route) {
+        // Home
+        composable(Nav.Home.route) {
             WelcomeView(navController)
         }
-        composable(Navigation.Modpack.route) {
+
+        // Modpack
+        composable(Nav.Modpack.route) {
             ModpackView(navController)
         }
 
-        dialog(Navigation.Settings(Navigation.Home).route) {
+        // Settings
+        dialog(Nav.Settings(Nav.Home).route) {
             SettingsDialog(navController)
         }
-        dialog(Navigation.Settings(Navigation.Modpack).route) {
+        dialog(Nav.Settings(Nav.Modpack).route) {
             SettingsDialog(navController)
+        }
+
+        // New Modpack
+        dialog(Nav.NewModpack(Nav.Home).route) {
+            NewModpackDialog(navController)
+        }
+        dialog(Nav.NewModpack(Nav.Modpack).route) {
+            NewModpackDialog(navController)
         }
     }
 }

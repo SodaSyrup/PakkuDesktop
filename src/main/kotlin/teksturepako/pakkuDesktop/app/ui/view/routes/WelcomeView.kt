@@ -40,7 +40,7 @@ import teksturepako.pakkuDesktop.app.ui.component.dropdown.WelcomeViewDropdown
 import teksturepako.pakkuDesktop.app.ui.component.text.GradientHeader
 import teksturepako.pakkuDesktop.app.ui.component.text.Header
 import teksturepako.pakkuDesktop.app.ui.modifier.subtractTopHeight
-import teksturepako.pakkuDesktop.app.ui.view.Navigation
+import teksturepako.pakkuDesktop.app.ui.view.Nav
 import teksturepako.pakkuDesktop.app.ui.viewmodel.ProfileViewModel
 import teksturepako.pakkuDesktop.pkui.component.ContentBox
 import teksturepako.pakkuDesktop.pro.ui.component.Pro
@@ -59,7 +59,7 @@ fun PakkuApplicationScope.WelcomeView(navController: NavHostController) {
         if (directory?.path == null) return@rememberDirectoryPickerLauncher
         coroutineScope.launch {
             ProfileViewModel.updateCurrentProfile(Path(directory.path!!))
-            navController.navigate(Navigation.Modpack.route)
+            navController.navigate(Nav.Modpack.route)
         }
     }
 
@@ -69,7 +69,7 @@ fun PakkuApplicationScope.WelcomeView(navController: NavHostController) {
             WelcomeViewDropdown(openModpackDirectoryLauncher, navController)
         }
         AlignedTitleBarContent(alignment = Alignment.End) {
-            SettingsButton(onClick = { navController.navigate(Navigation.Settings(Navigation.Home).route) })
+            SettingsButton(onClick = { navController.navigate(Nav.Settings(Nav.Home).route) })
         }
     }
 
@@ -118,7 +118,9 @@ fun PakkuApplicationScope.WelcomeView(navController: NavHostController) {
                                 horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
                             ) {
                                 OutlinedButton(
-                                    onClick = {  },
+                                    onClick = {
+                                        navController.navigate(Nav.NewModpack(Nav.Home).route)
+                                    },
                                 ) {
                                     FlowRow(
                                         horizontalArrangement = Arrangement.spacedBy(4.dp),
@@ -191,7 +193,7 @@ fun PakkuApplicationScope.WelcomeView(navController: NavHostController) {
                                     HoverablePanel(
                                         onClick = {
                                             coroutineScope.launch {
-                                                navController.navigate(Navigation.Modpack.route)
+                                                navController.navigate(Nav.Modpack.route)
                                                 ProfileViewModel.updateCurrentProfile(Path(profile.path))
                                             }
                                         }

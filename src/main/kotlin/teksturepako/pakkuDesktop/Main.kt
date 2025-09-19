@@ -14,7 +14,6 @@ import kotlinx.coroutines.runBlocking
 import teksturepako.pakku.api.CredentialsFile
 import teksturepako.pakku.api.pakku
 import teksturepako.pakku.debug
-import teksturepako.pakku.debugMode
 import teksturepako.pakkuDesktop.app.ui.application.theme.themedApplication
 import teksturepako.pakkuDesktop.app.ui.application.window.MainWindow
 import teksturepako.pakkuDesktop.app.ui.view.RootView
@@ -24,9 +23,6 @@ import teksturepako.pakkuDesktop.pro.ui.viewmodel.LicenseKeyViewModel
 
 fun main()
 {
-    // Set Pakku's debug mode to `true`
-    debugMode = false
-
     loggingConfiguration {
         ANSI_CONSOLE()
         sink(
