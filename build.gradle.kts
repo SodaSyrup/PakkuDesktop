@@ -5,7 +5,7 @@ import java.util.*
 plugins {
     kotlin("jvm") version "2.1.20"
     kotlin("plugin.serialization") version "2.1.20"
-    id("org.jetbrains.compose") version "1.9.0-beta03"
+    id("org.jetbrains.compose") version "1.9.0"
     id("org.jetbrains.kotlin.plugin.compose") version "2.1.20"
 }
 
@@ -54,22 +54,23 @@ repositories {
 }
 
 dependencies {
-    // Note, if you develop a library, you should use compose.desktop.common.
-    // compose.desktop.currentOs should be used in launcher-sourceSet
-    // (in a separate module for demo project and in testMain).
-    // With compose.desktop.common you will also lose @Preview functionality
+    /**
+     * Pakku Desktop uses **Jewel**.
+     *
+     * [release notes](https://github.com/JetBrains/intellij-community/blob/master/platform/jewel/RELEASE%20NOTES.md)
+     * [mvn repo](https://mvnrepository.com/artifact/org.jetbrains.jewel/jewel-foundation)
+     */
+    val jewel = "0.31.0-252.27409"
 
-    val jewel = "0.30.0-252.26252"
-
-    // See https://github.com/JetBrains/Jewel/releases for the release notes
-    implementation("org.jetbrains.jewel:jewel-ui:$jewel")
     implementation("org.jetbrains.jewel:jewel-foundation:$jewel")
+
+    implementation("org.jetbrains.jewel:jewel-ui:$jewel")
     implementation("org.jetbrains.jewel:jewel-int-ui-standalone:$jewel")
 
-    // Optional, for custom decorated windows:
+    // Optional, for custom decorated windows
     implementation("org.jetbrains.jewel:jewel-int-ui-decorated-window:$jewel")
 
-    // Optional, for markdown renderer:
+    // Optional, for markdown renderer
     implementation("org.jetbrains.jewel:jewel-markdown-core:$jewel")
     implementation("org.jetbrains.jewel:jewel-markdown-int-ui-standalone-styling:$jewel")
     implementation("org.jetbrains.jewel:jewel-markdown-extensions-gfm-alerts:$jewel")
@@ -98,7 +99,7 @@ dependencies {
     implementation("com.jetbrains.intellij.platform:icons:252.25557.131")
 
     // Pakku
-    implementation("teksturepako.pakku:pakku-jvm:1.2.1")
+    implementation("teksturepako.pakku:pakku-jvm:1.3.2")
 
     // Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
@@ -124,7 +125,7 @@ compose.desktop {
 
         nativeDistributions {
 
-            packageName = "PakkuDesktop"
+            packageName = "Pakku Desktop"
             packageVersion = "1.0.0"
             vendor = "teksturepako"
 
