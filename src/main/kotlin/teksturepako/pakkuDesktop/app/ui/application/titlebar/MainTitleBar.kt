@@ -43,6 +43,7 @@ fun PakkuApplicationScope.MainTitleBar(
 
                 AlignedTitleBarContent(modifier.padding(horizontal = 8.dp), alignment = Alignment.End) {
                     ThemeButton()
+                    AlphaLabel()
                 }
 
                 content(this@TitleBar)
