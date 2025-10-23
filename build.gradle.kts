@@ -5,7 +5,7 @@ import java.util.*
 plugins {
     kotlin("jvm") version "2.1.20"
     kotlin("plugin.serialization") version "2.1.20"
-    id("org.jetbrains.compose") version "1.8.1"
+    id("org.jetbrains.compose") version "1.9.0-beta03"
     id("org.jetbrains.kotlin.plugin.compose") version "2.1.20"
 }
 
@@ -35,8 +35,6 @@ tasks.withType<JavaExec> {
 }
 
 repositories {
-    maven("https://packages.jetbrains.team/maven/p/kpm/public/")
-
     maven("https://www.jetbrains.com/intellij-repository/releases")
 
     mavenCentral()
@@ -61,18 +59,21 @@ dependencies {
     // (in a separate module for demo project and in testMain).
     // With compose.desktop.common you will also lose @Preview functionality
 
-    val jewel = "243:0.27.0"
+    val jewel = "0.30.0-252.26252"
 
     // See https://github.com/JetBrains/Jewel/releases for the release notes
-    implementation("org.jetbrains.jewel:jewel-int-ui-standalone-$jewel")
+    implementation("org.jetbrains.jewel:jewel-ui:$jewel")
+    implementation("org.jetbrains.jewel:jewel-foundation:$jewel")
+    implementation("org.jetbrains.jewel:jewel-int-ui-standalone:$jewel")
 
     // Optional, for custom decorated windows:
-    implementation("org.jetbrains.jewel:jewel-int-ui-decorated-window-$jewel")
+    implementation("org.jetbrains.jewel:jewel-int-ui-decorated-window:$jewel")
 
     // Optional, for markdown renderer:
-    implementation("org.jetbrains.jewel:jewel-markdown-int-ui-standalone-styling-$jewel")
-    implementation("org.jetbrains.jewel:jewel-markdown-extension-gfm-alerts-$jewel")
-    implementation("org.jetbrains.jewel:jewel-markdown-extension-autolink-$jewel")
+    implementation("org.jetbrains.jewel:jewel-markdown-core:$jewel")
+    implementation("org.jetbrains.jewel:jewel-markdown-int-ui-standalone-styling:$jewel")
+    implementation("org.jetbrains.jewel:jewel-markdown-extensions-gfm-alerts:$jewel")
+    implementation("org.jetbrains.jewel:jewel-markdown-extensions-autolink:$jewel")
 
     // Do not bring in Material (we use Jewel)
     implementation(compose.desktop.currentOs) {
@@ -94,7 +95,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
 
     // IntelliJ Icons: https://mvnrepository.com/artifact/com.jetbrains.intellij.platform/icons
-    implementation("com.jetbrains.intellij.platform:icons:243.21565.208")
+    implementation("com.jetbrains.intellij.platform:icons:252.25557.131")
 
     // Pakku
     implementation("teksturepako.pakku:pakku-jvm:1.2.1")
