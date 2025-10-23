@@ -9,7 +9,7 @@ import androidx.navigation.NavHostController
 import teksturepako.pakkuDesktop.pkui.component.PkUiDialogWindow
 
 @Composable
-fun SettingsDialog(navController: NavHostController)
+fun SettingsDialogWindow(navController: NavHostController)
 {
     PkUiDialogWindow(
         visible = navController.currentDestination?.route?.contains("settings") == true,

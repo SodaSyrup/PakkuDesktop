@@ -16,8 +16,9 @@ import kotlinx.serialization.Serializable
 import teksturepako.pakkuDesktop.app.ui.application.PakkuApplicationScope
 import teksturepako.pakkuDesktop.app.ui.view.routes.ModpackView
 import teksturepako.pakkuDesktop.app.ui.view.routes.WelcomeView
+import teksturepako.pakkuDesktop.app.ui.view.routes.dialogs.ErrorDialogWindow
 import teksturepako.pakkuDesktop.app.ui.view.routes.dialogs.NewModpackDialog
-import teksturepako.pakkuDesktop.app.ui.view.routes.dialogs.SettingsDialog
+import teksturepako.pakkuDesktop.app.ui.view.routes.dialogs.SettingsDialogWindow
 import teksturepako.pakkuDesktop.app.ui.viewmodel.ProfileViewModel
 
 @Serializable
@@ -26,6 +27,7 @@ sealed class Nav(val route: String) {
     data object Modpack : Nav("modpack")
     data class Settings(val parent: Nav) : Nav("${parent.route}/settings")
     data class NewModpack(val parent: Nav) : Nav("${parent.route}/new_modpack")
+    data object Err : Nav("error")
 }
 
 @Composable
@@ -34,7 +36,8 @@ fun PakkuApplicationScope.RootView() {
     val navController = rememberNavController()
 
     LaunchedEffect(Unit) {
-        if (profileData.currentProfile != null) {
+        if (profileData.currentProfile != null)
+        {
             navController.navigate(Nav.Modpack.route)
         }
     }
@@ -55,10 +58,10 @@ fun PakkuApplicationScope.RootView() {
 
         // Settings
         dialog(Nav.Settings(Nav.Home).route) {
-            SettingsDialog(navController)
+            SettingsDialogWindow(navController)
         }
         dialog(Nav.Settings(Nav.Modpack).route) {
-            SettingsDialog(navController)
+            SettingsDialogWindow(navController)
         }
 
         // New Modpack
@@ -67,6 +70,11 @@ fun PakkuApplicationScope.RootView() {
         }
         dialog(Nav.NewModpack(Nav.Modpack).route) {
             NewModpackDialog(navController)
+        }
+
+        // Error
+        dialog(Nav.Err.route) {
+            ErrorDialogWindow(navController)
         }
     }
 }

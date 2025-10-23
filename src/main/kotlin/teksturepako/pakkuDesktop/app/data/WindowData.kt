@@ -39,4 +39,3 @@ data class WindowData(
 
     suspend fun write(): ActionError? = writeToFile<WindowData>(this, FILE_NAME, format = _json)
 }
-

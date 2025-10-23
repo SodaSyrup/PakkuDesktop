@@ -5,7 +5,6 @@
 package teksturepako.pakkuDesktop.pro.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
@@ -20,7 +19,6 @@ import org.jetbrains.jewel.ui.component.Text
 import teksturepako.pakkuDesktop.pkui.component.PkUiDialog
 import teksturepako.pakkuDesktop.pro.ui.viewmodel.GitViewModel
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun GitPushDialog(
     visible: Boolean,

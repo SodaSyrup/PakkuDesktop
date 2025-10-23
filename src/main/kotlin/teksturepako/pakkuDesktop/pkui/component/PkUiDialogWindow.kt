@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogState
 import androidx.compose.ui.window.DialogWindow
 import androidx.compose.ui.window.rememberDialogState
 import org.jetbrains.jewel.ui.component.Icon
@@ -22,16 +23,15 @@ fun PkUiDialogWindow(
     visible: Boolean,
     onDismiss: () -> Unit,
     title: String? = null,
+    dialogState: DialogState = rememberDialogState(),
     content: @Composable BoxScope.() -> Unit
 ) {
-    val dialogState = rememberDialogState()
-
     DialogWindow(
         visible = visible,
         onCloseRequest = { onDismiss() },
         state = dialogState,
         undecorated = true,
-        resizable = false
+        resizable = false,
     ) {
         WindowDraggableArea {
             ContentBox(

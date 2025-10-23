@@ -121,7 +121,6 @@ fun HoverablePanel(
                     elevation = JewelTheme.tooltipStyle.metrics.shadowSize,
                     shape = RoundedCornerShape(JewelTheme.tooltipStyle.metrics.cornerSize),
                     ambientColor = JewelTheme.globalColors.borders.disabled,
-                    spotColor = Color.Transparent,
                 )
                 .clip(RoundedCornerShape(cornerRadius))
                 .background(JewelTheme.globalColors.panelBackground)

@@ -23,7 +23,6 @@ import teksturepako.pakku.api.actions.errors.FileNotFound
 import teksturepako.pakkuDesktop.app.ui.application.PakkuApplicationScope
 import teksturepako.pakkuDesktop.app.ui.application.titlebar.AlignedTitleBarContent
 import teksturepako.pakkuDesktop.app.ui.application.titlebar.MainTitleBar
-import teksturepako.pakkuDesktop.app.ui.component.Error
 import teksturepako.pakkuDesktop.app.ui.component.button.SettingsButton
 import teksturepako.pakkuDesktop.app.ui.component.dropdown.ModpackDropdown
 import teksturepako.pakkuDesktop.app.ui.component.modpack.ModpackSideBar
@@ -108,13 +107,13 @@ fun PakkuApplicationScope.ModpackView(navController: NavHostController)
                 .fillMaxSize()
                 .subtractTopHeight(titleBarHeight)
         ) {
-            if (modpackUiState.lockFile!!.getError() is FileNotFound)
+            if (modpackUiState.lockFile?.getError() is FileNotFound)
             {
                 navController.navigate(Nav.NewModpack(Nav.Modpack).route)
             }
             else
             {
-                modpackUiState.lockFile!!.getError()?.let { Error(it) }
+                navController.navigate(Nav.Err.route)
             }
         }
 

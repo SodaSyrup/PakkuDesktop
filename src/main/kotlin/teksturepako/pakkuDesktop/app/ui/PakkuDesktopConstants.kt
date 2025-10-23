@@ -12,8 +12,6 @@ import androidx.compose.ui.unit.sp
 object PakkuDesktopConstants
 {
     val headerSize: TextUnit = 24.sp
-
     val commonPaddingSize = 16.dp
-
     val highlightColor = Color(27, 204, 234)
 }

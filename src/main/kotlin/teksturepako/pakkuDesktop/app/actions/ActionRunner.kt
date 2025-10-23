@@ -17,7 +17,7 @@ fun actionRunner(actionName: String, action: CoroutineScope.() -> Job)
     {
         val job = action(coroutineScope)
 
-        ModpackViewModel.runActionWithJob(actionName, job)
+        ModpackViewModel.updateActionWithJob(actionName, job)
 
         job.invokeOnCompletion {
             coroutineScope.launch {

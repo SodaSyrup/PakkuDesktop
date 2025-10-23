@@ -54,7 +54,7 @@ fun ContentBox(
                 elevation = JewelTheme.tooltipStyle.metrics.shadowSize,
                 shape = shape,
                 ambientColor = color,
-                spotColor = Color.Transparent,
+                clip = false,
             )
             .background(
                 color = background.value,

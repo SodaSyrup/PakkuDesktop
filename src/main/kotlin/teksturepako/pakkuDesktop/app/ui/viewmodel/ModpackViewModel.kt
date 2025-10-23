@@ -254,7 +254,7 @@ object ModpackViewModel
 
     // -- ACTIONS --
 
-    fun runActionWithJob(updatedAction: String, job: Job)
+    fun updateActionWithJob(updatedAction: String, job: Job)
     {
         _modpackUiState.update { currentState ->
             currentState.copy(
@@ -270,7 +270,8 @@ object ModpackViewModel
             try
             {
                 _modpackUiState.value.action.second?.cancelAndJoin()
-            } catch (_: Exception)
+            }
+            catch (_: Exception)
             {
             }
 
