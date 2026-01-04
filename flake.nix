@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { self, nixpkgs, flake-utils }:
@@ -66,21 +65,6 @@
           build-pakku = buildScript;
           run-pakku = runScript;
           default = buildScript;
-        };
-
-        apps = {
-          build = {
-            type = "app";
-            program = "${buildScript}/bin/build-pakku";
-          };
-          run = {
-            type = "app";
-            program = "${runScript}/bin/run-pakku";
-          };
-          default = {
-            type = "app";
-            program = "${runScript}/bin/run-pakku";
-          };
         };
 
         devShells.default = pkgs.mkShell {
