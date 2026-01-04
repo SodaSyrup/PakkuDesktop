@@ -80,11 +80,6 @@
             export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath runtimeLibs}:$LD_LIBRARY_PATH"
             export GRADLE_OPTS="-Dorg.gradle.java.home=${jdk}"
             
-            if [ ! -f gradle.properties.backup ]; then
-              if [ -f gradle.properties ]; then
-                cp gradle.properties gradle.properties.backup
-              fi
-            fi
             
             if [ -z "$GITHUB_ACTOR" ] || [ -z "$GITHUB_TOKEN" ]; then
               echo "⚠️  GitHub credentials not set. Export GITHUB_ACTOR and GITHUB_TOKEN to download dependencies."
