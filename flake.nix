@@ -84,11 +84,6 @@
               if [ -f gradle.properties ]; then
                 cp gradle.properties gradle.properties.backup
               fi
-              cat >> gradle.properties << EOF
-
-org.gradle.java.installations.auto-detect=false
-org.gradle.java.installations.fromEnv=JAVA_HOME
-EOF
             fi
             
             if [ -z "$GITHUB_ACTOR" ] || [ -z "$GITHUB_TOKEN" ]; then
