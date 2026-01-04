@@ -13,7 +13,7 @@
           config.allowUnfree = true;
         };
 
-        jdk = pkgs.jetbrains.jdk-no-jcef-17 or pkgs.jdk17;
+        jdk = pkgs.jetbrains.jdk-no-jcef-17;
         
         runtimeLibs = with pkgs; [
           libGL
